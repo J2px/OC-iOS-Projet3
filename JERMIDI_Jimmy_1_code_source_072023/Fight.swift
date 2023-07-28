@@ -68,8 +68,7 @@ class Fight {
             
         }
 
-        // Le combat est terminé, vous pouvez maintenant déterminer le gagnant, si nécessaire
-        // Par exemple, vous pouvez utiliser la fonction isOver
+        
         let isOverResult = isOver(p1lifePoints: p1lifePoints, p2lifePoints: p2lifePoints)
         
         print("Le combat est terminé, isOver: \(isOverResult)")
