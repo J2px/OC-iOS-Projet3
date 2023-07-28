@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2117FD662A701251004D9965 /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117FD652A701251004D9965 /* Fight.swift */; };
 		21A88C262A65665E00CBFE40 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A88C252A65665E00CBFE40 /* main.swift */; };
 		21A88C2D2A65696500CBFE40 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A88C2C2A65696500CBFE40 /* Game.swift */; };
 		21A88C2F2A656A3C00CBFE40 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A88C2E2A656A3C00CBFE40 /* Player.swift */; };
 		21A88C312A656D7400CBFE40 /* UserCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A88C302A656D7400CBFE40 /* UserCharacter.swift */; };
-		21CE50D32A69142400F0C920 /* Computer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE50D22A69142400F0C920 /* Computer.swift */; };
 		21CE50D52A6969B200F0C920 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE50D42A6969B200F0C920 /* Weapon.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,12 +28,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2117FD652A701251004D9965 /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 		21A88C222A65665E00CBFE40 /* JERMIDI_Jimmy_1_code_source_072023 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JERMIDI_Jimmy_1_code_source_072023; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A88C252A65665E00CBFE40 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		21A88C2C2A65696500CBFE40 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		21A88C2E2A656A3C00CBFE40 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		21A88C302A656D7400CBFE40 /* UserCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCharacter.swift; sourceTree = "<group>"; };
-		21CE50D22A69142400F0C920 /* Computer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computer.swift; sourceTree = "<group>"; };
 		21CE50D42A6969B200F0C920 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,8 +71,8 @@
 				21A88C302A656D7400CBFE40 /* UserCharacter.swift */,
 				21A88C2C2A65696500CBFE40 /* Game.swift */,
 				21A88C2E2A656A3C00CBFE40 /* Player.swift */,
-				21CE50D22A69142400F0C920 /* Computer.swift */,
 				21CE50D42A6969B200F0C920 /* Weapon.swift */,
+				2117FD652A701251004D9965 /* Fight.swift */,
 			);
 			path = JERMIDI_Jimmy_1_code_source_072023;
 			sourceTree = "<group>";
@@ -137,10 +137,10 @@
 			files = (
 				21A88C262A65665E00CBFE40 /* main.swift in Sources */,
 				21A88C2F2A656A3C00CBFE40 /* Player.swift in Sources */,
-				21CE50D32A69142400F0C920 /* Computer.swift in Sources */,
 				21A88C2D2A65696500CBFE40 /* Game.swift in Sources */,
 				21A88C312A656D7400CBFE40 /* UserCharacter.swift in Sources */,
 				21CE50D52A6969B200F0C920 /* Weapon.swift in Sources */,
+				2117FD662A701251004D9965 /* Fight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

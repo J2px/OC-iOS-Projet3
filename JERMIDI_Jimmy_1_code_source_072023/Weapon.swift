@@ -6,3 +6,30 @@
 //
 
 import Foundation
+
+
+class Weapon {
+    var hit: Int
+    
+    init(hit: Int) {
+        self.hit = hit
+    }
+}
+
+class Sword: Weapon {
+    override init(hit: Int) {
+        super.init(hit: hit)
+    }
+}
+
+class Spear: Weapon {
+    override init(hit: Int) {
+        super.init(hit: hit)
+    }
+}
+
+class Knife: Weapon {
+    override init(hit: Int) {
+        super.init(hit: hit)
+    }
+}

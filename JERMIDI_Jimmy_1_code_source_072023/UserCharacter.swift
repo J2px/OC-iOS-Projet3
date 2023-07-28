@@ -12,6 +12,7 @@ class UserCharacter{
     var name:String
     var profile:Int
     var lifePoint=100
+    var isLiving=true
     
     init(id:Int, name:String, profile:Int){
         self.id=id
@@ -20,7 +21,16 @@ class UserCharacter{
         
     }
     
-    
+    func verifyIfIsLiving(lifePoint:Int)->Bool{
+        if(lifePoint==0){
+             isLiving = false
+        }else{
+             isLiving = true
+            
+        }
+        
+        return isLiving
+    }
     
     
     
