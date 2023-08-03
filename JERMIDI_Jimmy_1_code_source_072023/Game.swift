@@ -35,7 +35,7 @@ class Game{
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
                 if let input = readLine(), let profileInput = Int(input) {
-                    player1.createUserCharacter(name: name, profile: profileInput)
+                    player1.createUserCharacter(id:i+1, name: name, profile: profileInput)
                 }
             }
         }
@@ -54,7 +54,7 @@ class Game{
         
         /// Player 2: character selection
         print("Joueur n°2")
-        print("Pour commencer, veuillez créer vos\(maxCharacters)personnages")
+        print("Pour commencer, veuillez créer vos \(maxCharacters) personnages")
         while (player2.userCharacters.count < maxCharacters) {
             let i = player2.userCharacters.count
             print("Personnage \(i + 1)")
@@ -64,7 +64,7 @@ class Game{
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
                 if let input = readLine(), let profileInput = Int(input) {
-                    player2.createUserCharacter(name: name, profile: profileInput)
+                    player2.createUserCharacter(id:i+1, name: name, profile: profileInput)
                 }
             }
         }

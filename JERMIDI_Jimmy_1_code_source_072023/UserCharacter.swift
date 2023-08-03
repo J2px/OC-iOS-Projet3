@@ -8,13 +8,14 @@
 import Foundation
 
 class UserCharacter{
-    var id: String = UUID().uuidString
+    var id: Int
     var name:String
     var profile:Int
     var lifePoint = 100
     var isLiving = true
     
-    init(name:String, profile:Int){
+    init(id:Int, name:String, profile:Int){
+        self.id=id
         self.name=name
         self.profile=profile
     }

@@ -21,9 +21,8 @@ class Fight {
         print("Joueur 1")
         print("Veuillez sélectionner votre combattant")
         for userCharacter in player1.userCharacters {
-            let i = player1.userCharacters.count
             if(userCharacter.isLiving==true){
-            print("Personnage \(i + 1): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
+                print("Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile) Tapez \(userCharacter.id)")
             }
         }
         
@@ -47,9 +46,8 @@ class Fight {
         print("Joueur 2")
         print("Veuillez sélectionner votre combattant")
         for userCharacter in player2.userCharacters {
-            let i = player1.userCharacters.count
             if(userCharacter.isLiving==true){
-            print("Personnage \(i + 1): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
+                print("Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile) Tapez \(userCharacter.id)")
             }
         }
         var charInput2: Int?

@@ -14,8 +14,8 @@ class Player{
     var deadCharacters: [UserCharacter] = []
     
     /// This function is used to create a character and add it to an array
-    func createUserCharacter(name:String, profile:Int){
-        let character = UserCharacter(name: name , profile: profile)
+    func createUserCharacter(id:Int, name:String, profile:Int){
+        let character = UserCharacter(id: id,name: name , profile: profile)
         userCharacters.append(character)
     }
     
