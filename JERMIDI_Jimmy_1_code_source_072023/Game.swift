@@ -8,18 +8,23 @@
 import Foundation
 
 class Game{
+    
     let id = UUID().uuidString
+    let maxCharacters: Int
     
+    init(maxCharacters: Int) {
+        self.maxCharacters = maxCharacters
+    }
     
+    /// This function start the game
+    ///  1. Init two players
+    ///  2. For each pelayer, create characters accordin to `maxCharacters`
     func start(){
-        let maxCharacters = 3
         let player1 = Player()
         let player2 = Player()
         
-        //*********** JOUEUR 1 *************************************************
-        var idplayer1 = player1.id
-        idplayer1 = 1
-        print("Joueur n°\(idplayer1)")
+        /// Player 1: character selection
+        print("Joueur n°1")
         print("Pour commencer, veuillez créer vos \(maxCharacters) personnages")
         while (player1.userCharacters.count < maxCharacters) {
             let i = player1.userCharacters.count
@@ -30,11 +35,11 @@ class Game{
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
                 if let input = readLine(), let profileInput = Int(input) {
-                    player1.createUserCharacter(id: i+1, name: name, profile: profileInput)
+                    player1.createUserCharacter(name: name, profile: profileInput)
                 }
             }
         }
-        print("Joueur n°\(idplayer1)")
+        print("Joueur n°1")
         print("Liste des personnages de votre équipe:")
         for userCharacter in player1.userCharacters {
             print("Personnage \(userCharacter.id): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
@@ -47,10 +52,8 @@ class Game{
             }
         print()
         
-        //*********** JOUEUR 2 *************************************************
-        var idplayer2 = player2.id
-        idplayer2 = 2
-        print("Joueur n°\(idplayer2)")
+        /// Player 2: character selection
+        print("Joueur n°2")
         print("Pour commencer, veuillez créer vos\(maxCharacters)personnages")
         while (player2.userCharacters.count < maxCharacters) {
             let i = player2.userCharacters.count
@@ -61,11 +64,11 @@ class Game{
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
                 if let input = readLine(), let profileInput = Int(input) {
-                    player2.createUserCharacter(id: i+1, name: name, profile: profileInput)
+                    player2.createUserCharacter(name: name, profile: profileInput)
                 }
             }
         }
-        print("Joueur n°\(idplayer2)")
+        print("Joueur n°2")
         print("Liste des personnages de votre équipe:")
         for userCharacter in player2.userCharacters {
             print("Personnage \(userCharacter.id): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
@@ -76,6 +79,8 @@ class Game{
             player2.teamName=teamName2
             print("Le nom de votre équipe est \(teamName2)")
             }
+        
+        /// Fight loop
         print()
         
         print()
@@ -85,30 +90,20 @@ class Game{
         print()
         
         let fight = Fight()
-        var loserArray1: [UserCharacter] = []
-        var loserArray2: [UserCharacter] = []
         
-        while loserArray1.count < maxCharacters && loserArray2.count < maxCharacters {
-            fight.start(player1: player1, player2: player2)
-            if(fight.loserTeamId==1){
-                loserArray1.append(fight.loser!)
-            }
+        while player1.isAlive() && player2.isAlive()  {
+            let winner = fight.start(player1: player1, player2: player2)
             
-            if(fight.loserTeamId==2){
-                loserArray2.append(fight.loser!)
+            if winner == 1{
+                print("Le vainqueur du combat est le joueur 1")
+            }else if(winner == 2){
+                print("Le vainqueur du combat est le joueur 2")
+            }else{
+                print("Match nul")
             }
-            
-            print("Personnages éliminés dans l'équipe \(player1.teamName):")
-            for loser in loserArray1 {
-                print("Nom -> \(loser.name), Profile -> \(loser.profile)")
-            }
-            
-            print("Personnages éliminés dans l'équipe \(player2.teamName):")
-            for loser in loserArray2 {
-                print("Nom -> \(loser.name), Profile -> \(loser.profile)")
-            }
-            
         }
+        
+        /// Game result
         
         print()
         print("***********************************************")
@@ -116,13 +111,16 @@ class Game{
         print("***********************************************")
         print()
         
-        if(loserArray1.count == maxCharacters){
-            print("Résultat final: Le vainqueur est l'équipe \(player2.teamName)")
+        
+         if(player2.deadCharacters.count == maxCharacters){
+             print("Résultat final: Le vainqueur est l'équipe \(player1.teamName)")
+         }
+         
+         if(player1.deadCharacters.count == maxCharacters){
+             print("Résultat final: Le vainqueur est l'équipe \(player2.teamName)")
         }
         
-        if(loserArray2.count == maxCharacters){
-            print("Résultat final: Le vainqueur est l'équipe \(player1.teamName)")
-        }
+        
         
     }
     

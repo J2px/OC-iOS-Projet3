@@ -7,7 +7,7 @@
 
 import Foundation
 
-var game = Game()
+var game = Game(maxCharacters: 3)
 print("Bienvenue")
 print("Nouveau Jeu")
 game.start()

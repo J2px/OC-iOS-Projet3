@@ -8,19 +8,23 @@
 import Foundation
 
 class Player{
-    var id=0
-    var teamName=" "
+    var id: String = UUID().uuidString
+    var teamName = ""
     var userCharacters: [UserCharacter] = []
+    var deadCharacters: [UserCharacter] = []
     
-    
-    func createUserCharacter(id: Int,name:String, profile:Int){
-            let character = UserCharacter(id:id ,name:name , profile:profile)
-
+    /// This function is used to create a character and add it to an array
+    func createUserCharacter(name:String, profile:Int){
+        let character = UserCharacter(name: name , profile: profile)
         userCharacters.append(character)
     }
     
+    func isAlive() -> Bool {
+        /// Loop on all characters and check if all characters are dead
+        userCharacters.filter({ $0.isLiving }).count != 0
+    }
     
-    
+    /// This function is used to make a choice for an action (attack or care)
     func attack(choice:Int, currentCharacter: UserCharacter)->Int{
         var hit:Int=0
         switch(choice){
@@ -29,13 +33,13 @@ class Player{
             sword.hit=hit
             switch(currentCharacter.profile){
                 case 1:
-                    hit=30
+                    hit=25
                 case 2:
                     hit=20
                 case 3:
-                    hit=10
+                    hit=30
                 case 4:
-                    hit=40
+                    hit=15
             default:
                 hit=0
             }
@@ -46,26 +50,26 @@ class Player{
                 case 1:
                     hit=30
                 case 2:
-                    hit=20
+                    hit=35
                 case 3:
-                    hit=10
-                case 4:
                     hit=40
+                case 4:
+                    hit=30
             default:
                 hit=0
             }
         case 3:
-            let spear = Spear(hit: hit)
-            spear.hit=hit
+            let knife = Knife(hit: hit)
+            knife.hit=hit
             switch(currentCharacter.profile){
                 case 1:
-                    hit=30
-                case 2:
                     hit=20
+                case 2:
+                    hit=15
                 case 3:
-                    hit=10
+                    hit=25
                 case 4:
-                    hit=40
+                    hit=10
             default:
                 hit=0
             }
@@ -74,21 +78,6 @@ class Player{
         }
             
         return hit
-            
-            
-        
-        
-        
     }
-    
-    func care(choice:Int){
-        
-        
-    }
-    
-    
-    
-    
-    
     
 }

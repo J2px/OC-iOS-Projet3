@@ -8,61 +8,117 @@
 import Foundation
 
 class Fight {
-    var winner: UserCharacter?
-    var loser: UserCharacter?
-    var loserTeamId=0
+    var winnerTeamId=0
     
-    func start(player1: Player, player2: Player) {
-        var currentCharacter1: UserCharacter?
-        var currentCharacter2: UserCharacter?
+    
+    /// Start the fight between two players and returns the dead character
+    func start(player1: Player, player2: Player) -> (Int) {
+        var currentCharacter1: UserCharacter!
+        var currentCharacter2: UserCharacter!
         
+        /// Player 1: fighter selection
         
-        print("Joueur \(player1.id)")
+        print("Joueur 1")
         print("Veuillez sélectionner votre combattant")
         for userCharacter in player1.userCharacters {
-            print("Personnage \(userCharacter.id): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
+            let i = player1.userCharacters.count
+            if(userCharacter.isLiving==true){
+            print("Personnage \(i + 1): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
+            }
         }
-        if let curCharInput1 = readLine(), let charInput1 = Int(curCharInput1) {
+        
+        var charInput1: Int?
+
+        while true {
+            if let curCharInput1 = readLine(), !curCharInput1.isEmpty, let inputInt = Int(curCharInput1), (1...3).contains(inputInt) {
+                charInput1 = inputInt
+                break
+            } else {
+                print("Veuillez saisir un nombre entre 1 et 3.")
+            }
+        }
+
+        if let charInput1 = charInput1 {
             currentCharacter1 = selectFighter(choice: charInput1, player: player1)
         }
         
-        print("Joueur \(player2.id)")
+        /// Player 2: fighter selection
+        
+        print("Joueur 2")
         print("Veuillez sélectionner votre combattant")
         for userCharacter in player2.userCharacters {
-            print("Personnage \(userCharacter.id): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
+            let i = player1.userCharacters.count
+            if(userCharacter.isLiving==true){
+            print("Personnage \(i + 1): Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile)")
+            }
         }
-        if let curCharInput2 = readLine(), let charInput2 = Int(curCharInput2) {
-            currentCharacter2 = selectFighter(choice: charInput2, player: player2)
+        var charInput2: Int?
+
+        while true {
+            if let curCharInput2 = readLine(), !curCharInput2.isEmpty, let inputInt = Int(curCharInput2), (1...3).contains(inputInt) {
+                charInput2 = inputInt
+                break
+            } else {
+                print("Veuillez saisir un nombre entre 1 et 3.")
+            }
         }
 
+        if let charInput2 = charInput2 {
+            currentCharacter2 = selectFighter(choice: charInput2, player: player2)
+        }
+        
         var p1lifePoints = currentCharacter1?.lifePoint ?? 0
         var p2lifePoints = currentCharacter2?.lifePoint ?? 0
 
+        /// Fight result
+        
         while p1lifePoints > 0 && p2lifePoints > 0 {
-            // Le joueur 1 saisit un type d'attaque
+            /// Player 1: weapon selection
             print("Pour \(currentCharacter1!.name)")
             print("Veuillez saisir une action:")
             print("Attaque à l'épée   -> Tapez 1")
             print("Attaque à la lance -> Tapez 2")
             print("Attaque au couteau -> Tapez 3")
             print("Soin               -> Tapez 4")
-            if let input1 = readLine(), let actionInput1 = Int(input1) {
+            var actionInput1: Int?
+
+            while actionInput1 == nil {
+                if let input1 = readLine(), !input1.isEmpty, let inputInt = Int(input1), (1...4).contains(inputInt) {
+                    actionInput1 = inputInt
+                } else {
+                    print("Veuillez saisir un nombre compris entre 1 et 4.")
+                }
+            }
+
+            if let actionInput1 = actionInput1 {
                 let player1hit = player1.attack(choice: actionInput1, currentCharacter: currentCharacter1!)
                 p2lifePoints -= player1hit
             }
 
-            // Le joueur 2 saisit un type d'attaque
+            /// Player 2: weapon selection
             print("Pour \(currentCharacter2!.name)")
             print("Veuillez saisir une action:")
             print("Attaque à l'épée   -> Tapez 1")
             print("Attaque à la lance -> Tapez 2")
             print("Attaque au couteau -> Tapez 3")
             print("Soin               -> Tapez 4")
-            if let input2 = readLine(), let actionInput2 = Int(input2) {
+            var actionInput2: Int?
+
+            while actionInput2 == nil {
+                if let input2 = readLine(),!input2.isEmpty, let inputInt = Int(input2), (1...4).contains(inputInt) {
+                    actionInput2 = inputInt
+                } else {
+                    print("Veuillez saisir un nombre compris entre 1 et 4.")
+                }
+            }
+
+            if let actionInput2 = actionInput2 {
                 let player2hit = player2.attack(choice: actionInput2, currentCharacter: currentCharacter2!)
                 p1lifePoints -= player2hit
             }
             
+            
+            /// Fight result
             print("\(currentCharacter1!.name) a \(p1lifePoints) points")
             print("\(currentCharacter2!.name) a \(p2lifePoints) points")
             
@@ -73,15 +129,23 @@ class Fight {
         
         print("Le combat est terminé, isOver: \(isOverResult)")
         
-        winner=getWinner(currentCharacter1: currentCharacter1!, currentCharacter2: currentCharacter2!)
-        print("Le vainqueur du combat est \(winner!.name)")
-        loser=getLoser(currentCharacter1: currentCharacter1!, currentCharacter2: currentCharacter2!)
-        print("Le perdant est \(loser!.name)")
+        if p1lifePoints < p2lifePoints {
+            winnerTeamId = 2
+            currentCharacter1.isLiving=false
+            player1.deadCharacters.append(currentCharacter1)
+        } else if p2lifePoints < p1lifePoints {
+            winnerTeamId = 1
+            currentCharacter2.isLiving=false
+            player2.deadCharacters.append(currentCharacter2)
+        } else {
+            winnerTeamId = 0
+        }
         
-        deleteLoser(loser: loser!, userCharacters1: &player1.userCharacters, userCharacters2: &player2.userCharacters)
+    return winnerTeamId
         
     }
 
+    /// This function return a value to select a fighter for a fight
     func selectFighter(choice: Int, player: Player) -> UserCharacter? {
         guard choice > 0 && choice <= player.userCharacters.count else {
             return nil
@@ -91,51 +155,6 @@ class Fight {
 
     func isOver(p1lifePoints: Int, p2lifePoints: Int) -> Bool {
         return p1lifePoints <= 0 || p2lifePoints <= 0
-    }
-    
-    func getWinner(currentCharacter1: UserCharacter, currentCharacter2: UserCharacter)->UserCharacter{
-        var winner:UserCharacter?
-        
-        if(currentCharacter1.lifePoint<=0){
-            winner=currentCharacter2
-        }
-        
-        if(currentCharacter2.lifePoint<=0){
-            winner=currentCharacter1
-        }
-        
-        return winner!
-    }
-    
-    func getLoser(currentCharacter1: UserCharacter, currentCharacter2: UserCharacter)->UserCharacter{
-        var loser:UserCharacter?
-        
-        if(currentCharacter1.lifePoint<=0){
-            loser=currentCharacter1
-            currentCharacter1.isLiving=false
-            loserTeamId = 1
-            
-        }
-        
-        if(currentCharacter2.lifePoint<=0){
-            loser=currentCharacter1
-            currentCharacter1.isLiving=false
-            loserTeamId = 2
-            
-        }
-        
-        return loser!
-    }
-    
-    func deleteLoser(loser:UserCharacter, userCharacters1: inout [UserCharacter], userCharacters2: inout [UserCharacter]){
-        let id = loser.id
-        if(loserTeamId == 1){
-            userCharacters1.remove(at:id)
-        }
-        if(loserTeamId == 2){
-            userCharacters1.remove(at:id)
-            
-        }
     }
     
     
