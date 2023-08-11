@@ -8,7 +8,13 @@
 import Foundation
 
 class Fight {
-    var winnerTeamId=0
+    
+    var winnerTeamId = 0
+    var maxCharacters = 0
+    
+    init(maxCharacters: Int) {
+        self.maxCharacters = maxCharacters
+    }
     
     
     /// Start the fight between two players and returns the dead character
@@ -21,7 +27,7 @@ class Fight {
         print("Joueur 1")
         print("Veuillez sélectionner votre combattant")
         for userCharacter in player1.userCharacters {
-            if(userCharacter.isLiving==true){
+            if (userCharacter.isLiving) {
                 print("Nom -> \(userCharacter.name), Profile -> \(userCharacter.profile) Tapez \(userCharacter.id)")
             }
         }
@@ -29,11 +35,11 @@ class Fight {
         var charInput1: Int?
 
         while true {
-            if let curCharInput1 = readLine(), !curCharInput1.isEmpty, let inputInt = Int(curCharInput1), (1...3).contains(inputInt) {
+            if let curCharInput1 = readLine(), !curCharInput1.isEmpty, let inputInt = Int(curCharInput1), (1...maxCharacters).contains(inputInt) {
                 charInput1 = inputInt
                 break
             } else {
-                print("Veuillez saisir un nombre entre 1 et 3.")
+                print("Veuillez saisir un nombre entre 1 et \(maxCharacters).")
             }
         }
 
@@ -53,11 +59,11 @@ class Fight {
         var charInput2: Int?
 
         while true {
-            if let curCharInput2 = readLine(), !curCharInput2.isEmpty, let inputInt = Int(curCharInput2), (1...3).contains(inputInt) {
+            if let curCharInput2 = readLine(), !curCharInput2.isEmpty, let inputInt = Int(curCharInput2), (1...maxCharacters).contains(inputInt) {
                 charInput2 = inputInt
                 break
             } else {
-                print("Veuillez saisir un nombre entre 1 et 3.")
+                print("Veuillez saisir un nombre entre 1 et \(maxCharacters).")
             }
         }
 
@@ -89,7 +95,7 @@ class Fight {
             }
 
             if let actionInput1 = actionInput1 {
-                let player1hit = player1.attack(choice: actionInput1, currentCharacter: currentCharacter1!)
+                let player1hit = player1.attack(weaponChoice: actionInput1, currentCharacter: currentCharacter1!)
                 p2lifePoints -= player1hit
             }
 
@@ -111,7 +117,7 @@ class Fight {
             }
 
             if let actionInput2 = actionInput2 {
-                let player2hit = player2.attack(choice: actionInput2, currentCharacter: currentCharacter2!)
+                let player2hit = player2.attack(weaponChoice: actionInput2, currentCharacter: currentCharacter2!)
                 p1lifePoints -= player2hit
             }
             

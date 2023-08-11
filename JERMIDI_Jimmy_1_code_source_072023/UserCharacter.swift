@@ -7,20 +7,37 @@
 
 import Foundation
 
+enum Character: Int {
+    case warrior = 1,
+         magus = 2,
+         colossus = 3,
+         dwarf = 4
+    
+    var description: String {
+        switch self {
+        case .warrior:
+            return "I am a warrior"
+        case .magus:
+            return "I am Magus"
+        case .colossus:
+            return "I am Colossus"
+        case .dwarf:
+            return "I am Dwarf"
+        }
+    }
+}
+
 class UserCharacter{
     var id: Int
-    var name:String
-    var profile:Int
+    var name: String
+    var profile: Character
     var lifePoint = 100
     var isLiving = true
     
-    init(id:Int, name:String, profile:Int){
+    init(id: Int, name: String, profile: Character){
         self.id=id
         self.name=name
         self.profile=profile
     }
-    
-    
-    
     
 }

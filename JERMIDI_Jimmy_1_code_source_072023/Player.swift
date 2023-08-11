@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class Player{
     var id: String = UUID().uuidString
     var teamName = ""
@@ -14,7 +15,7 @@ class Player{
     var deadCharacters: [UserCharacter] = []
     
     /// This function is used to create a character and add it to an array
-    func createUserCharacter(id:Int, name:String, profile:Int){
+    func createUserCharacter(id: Int, name: String, profile: Character){
         let character = UserCharacter(id: id,name: name , profile: profile)
         userCharacters.append(character)
     }
@@ -25,53 +26,50 @@ class Player{
     }
     
     /// This function is used to make a choice for an action (attack or care)
-    func attack(choice:Int, currentCharacter: UserCharacter)->Int{
+    func attack(weaponChoice: Int, currentCharacter: UserCharacter) -> Int {
         var hit:Int=0
-        switch(choice){
+        switch(weaponChoice){
+        // Sword
         case 1:
             let sword = Sword(hit: hit)
             sword.hit=hit
-            switch(currentCharacter.profile){
-                case 1:
-                    hit=25
-                case 2:
-                    hit=20
-                case 3:
-                    hit=30
-                case 4:
-                    hit=15
-            default:
-                hit=0
+            switch(currentCharacter.profile) {
+            case .warrior:
+                hit = 25
+            case .magus:
+                hit = 20
+            case .colossus:
+                hit = 30
+            case .dwarf:
+                hit = 15
             }
         case 2:
+            // Spear
             let spear = Spear(hit: hit)
             spear.hit=hit
             switch(currentCharacter.profile){
-                case 1:
+                case .warrior:
                     hit=30
-                case 2:
+                case .magus:
                     hit=35
-                case 3:
+                case .colossus:
                     hit=40
-                case 4:
+                case .dwarf:
                     hit=30
-            default:
-                hit=0
             }
         case 3:
+            // Knife
             let knife = Knife(hit: hit)
             knife.hit=hit
             switch(currentCharacter.profile){
-                case 1:
+                case .warrior:
                     hit=20
-                case 2:
+                case .magus:
                     hit=15
-                case 3:
+                case .colossus:
                     hit=25
-                case 4:
+                case .dwarf:
                     hit=10
-            default:
-                hit=0
             }
         default:
             hit=0

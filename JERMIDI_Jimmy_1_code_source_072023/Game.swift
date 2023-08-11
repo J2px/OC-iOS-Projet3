@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class Game{
     
     let id = UUID().uuidString
@@ -30,12 +31,14 @@ class Game{
             let i = player1.userCharacters.count
             print("Personnage \(i + 1)")
             print("Quel est son nom?")
-            if let name = readLine(),!name.isEmpty {
+            if let name = readLine(), !name.isEmpty {
                 print("Quel est son profil?")
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
-                if let input = readLine(), let profileInput = Int(input) {
-                    player1.createUserCharacter(id:i+1, name: name, profile: profileInput)
+                if let input = readLine(), !input.isEmpty, let profileInput = Int(input), let character = Character(rawValue: profileInput) {
+                    player1.createUserCharacter(id: i + 1, name: name, profile: character)
+                } else {
+                    print("Oups, votre choix est invalide.")
                 }
             }
         }
@@ -63,8 +66,10 @@ class Game{
                 print("Quel est son profil?")
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
-                if let input = readLine(), let profileInput = Int(input) {
-                    player2.createUserCharacter(id:i+1, name: name, profile: profileInput)
+                if let input = readLine(), !input.isEmpty, let profileInput = Int(input), let character = Character(rawValue:profileInput) {
+                    player2.createUserCharacter(id:i+1, name: name, profile: character)
+                } else {
+                    print("Oups, votre choix est invalide.")
                 }
             }
         }
@@ -89,7 +94,7 @@ class Game{
         print("***********************************************")
         print()
         
-        let fight = Fight()
+        let fight = Fight(maxCharacters: maxCharacters)
         
         while player1.isAlive() && player2.isAlive()  {
             let winner = fight.start(player1: player1, player2: player2)
