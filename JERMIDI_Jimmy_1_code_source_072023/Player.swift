@@ -1,4 +1,4 @@
-//
+///
 //  Player.swift
 //  JERMIDI_Jimmy_1_code_source_072023
 //
@@ -78,4 +78,21 @@ class Player{
         return hit
     }
     
+    
+    func care(currentCharacter: UserCharacter) {
+            let caringAmount: Int
+
+            switch currentCharacter.profile {
+                case .warrior:
+                    caringAmount = 15
+                case .magus:
+                    caringAmount = 5
+                case .colossus:
+                    caringAmount = 10
+                case .dwarf:
+                    caringAmount = 5
+            }
+
+            currentCharacter.lifePoint += caringAmount
+        }
 }

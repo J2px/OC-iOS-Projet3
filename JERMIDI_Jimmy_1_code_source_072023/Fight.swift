@@ -95,8 +95,12 @@ class Fight {
             }
 
             if let actionInput1 = actionInput1 {
-                let player1hit = player1.attack(weaponChoice: actionInput1, currentCharacter: currentCharacter1!)
+                if actionInput1 == 4 {
+                            player1.care(currentCharacter: currentCharacter1)
+                        } else {
+                        let player1hit = player1.attack(weaponChoice: actionInput1, currentCharacter: currentCharacter1!)
                 p2lifePoints -= player1hit
+                }
             }
 
             /// Player 2: weapon selection
@@ -117,8 +121,12 @@ class Fight {
             }
 
             if let actionInput2 = actionInput2 {
-                let player2hit = player2.attack(weaponChoice: actionInput2, currentCharacter: currentCharacter2!)
+                if actionInput2 == 4 {
+                    player2.care(currentCharacter: currentCharacter2)
+                    } else {
+                    let player2hit = player2.attack(weaponChoice: actionInput2, currentCharacter: currentCharacter2!)
                 p1lifePoints -= player2hit
+                }
             }
             
             

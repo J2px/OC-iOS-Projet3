@@ -50,7 +50,7 @@ class Game{
         
         print("Quel est le nom de votre équipe :")
         if let teamName1 = readLine(),!teamName1.isEmpty {
-            player1.teamName=teamName1
+            player1.teamName = teamName1
             print("Le nom de votre équipe est \(teamName1)")
             }
         print()
@@ -67,7 +67,7 @@ class Game{
                 print("1 pour Warrior, 2 pour Magus, 3 pour Colossus, 4 pour Dwarf")
                 
                 if let input = readLine(), !input.isEmpty, let profileInput = Int(input), let character = Character(rawValue:profileInput) {
-                    player2.createUserCharacter(id:i+1, name: name, profile: character)
+                    player2.createUserCharacter(id: i + 1, name: name, profile: character)
                 } else {
                     print("Oups, votre choix est invalide.")
                 }
@@ -81,7 +81,7 @@ class Game{
         
         print("Quel est le nom de votre équipe :")
         if let teamName2 = readLine(),!teamName2.isEmpty {
-            player2.teamName=teamName2
+            player2.teamName = teamName2
             print("Le nom de votre équipe est \(teamName2)")
             }
         
